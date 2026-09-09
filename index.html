@@ -633,7 +633,7 @@
         document.getElementById('adminToggleBtn').innerText = "🔑 ورود سازنده (ادمین)";
         alert("از حالت ادمین خارج شدید.");
       } else {
-        const pass = prompt("رمز ورود سازنده بازی را وارد کنید (پیش‌فرض: esi):");
+        const pass = prompt("رمز ورود سازنده بازی را وارد کنید:");
         if (pass === "esi") {
           currentUser.isAdmin = true;
           document.getElementById('adminToggleBtn').innerText = "👑 ادمین فعال است (خروج)";
