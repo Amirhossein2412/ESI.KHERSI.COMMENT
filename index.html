@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>انتقادات و پیشنهادات بازی ESI KHERSI | اسی خرسی</title>
+
+  <!-- فونت لاله‌زار و وزیرمتن -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-color: #0e0c13;
+      --card-bg: #181420;
+      --card-inner: #221c2e;
+      --border-color: #312842;
+      --honey: #ffb703;
+      --orange: #fb8500;
+      --purple: #9d4edd;
+      --brown: #7f4f24;
+      --text: #ffffff;
+      --text-muted: #a39eb2;
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(251, 133, 0, 0.09) 0%, transparent 45%),
+        radial-gradient(circle at 85% 85%, rgba(157, 78, 221, 0.08) 0%, transparent 45%);
+      color: var(--text);
+      font-family: 'Vazirmatn', sans-serif;
+      padding: 24px 14px 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .lalezar {
+      font-family: 'Lalezar', cursive;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 780px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* بنر بالای صفحه */
+    .hero-box {
+      background: linear-gradient(145deg, #221a30, #14101c);
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 30px 20px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-box h1 {
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      color: var(--honey);
+      text-shadow: 0 0 20px rgba(255, 183, 3, 0.4);
+      margin-bottom: 8px;
+    }
+
+    .hero-box p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 580px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* فرم ارسال نظر */
+    .form-box {
+      background: var(--card-bg);
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+
+    .form-title {
+      font-size: 1.5rem;
+      color: var(--honey);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .user-profile-badge {
+      font-size: 0.85rem;
+      background: rgba(255,255,255,0.08);
+      padding: 4px 10px;
+      border-radius: 20px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .input-group {
+      margin-bottom: 14px;
+    }
+
+    input[type="text"], textarea {
+      width: 100%;
+      background: var(--card-inner);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 12px 14px;
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input[type="text"]:focus, textarea:focus {
+      border-color: var(--honey);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 95px;
+    }
+
+    /* دکمه‌ها */
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: 'Lalezar', cursive;
+      font-size: 1.15rem;
+      padding: 10px 20px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-submit {
+      background: linear-gradient(135deg, var(--honey), var(--orange));
+      color: #120b02;
+      flex: 1;
+      min-width: 180px;
+      box-shadow: 0 5px 15px rgba(251, 133, 0, 0.3);
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(251, 133, 0, 0.45);
+    }
+
+    .btn-google {
+      background: #ffffff;
+      color: #222;
+      box-shadow: 0 5px 15px rgba(255, 255, 255, 0.15);
+    }
+
+    .btn-google:hover {
+      background: #f1f1f1;
+      transform: translateY(-2px);
+    }
+
+    .btn-admin {
+      background: transparent;
+      border: 1px dashed var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-family: 'Vazirmatn', sans-serif;
+      padding: 6px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .btn-admin:hover {
+      border-color: var(--honey);
+      color: var(--honey);
+    }
+
+    /* لیست کامنت‌ها */
+    .comments-area {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .empty-state {
+      background: var(--card-bg);
+      border: 2px dashed var(--border-color);
+      border-radius: var(--radius);
+      padding: 40px 20px;
+      text-align: center;
+      color: var(--text-muted);
+    }
+
+    .empty-state span {
+      font-size: 3rem;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .comment-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 16px 18px;
+    }
+
+    .comment-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .comment-user {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .user-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--card-inner);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      border: 1px solid var(--border-color);
+      overflow: hidden;
+    }
+
+    .user-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .user-name {
+      font-weight: 700;
+      color: #fff;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .comment-date {
+      color: var(--text-muted);
+      font-size: 0.75rem;
+    }
+
+    .comment-text {
+      color: #dedede;
+      line-height: 1.6;
+      font-size: 0.95rem;
+      white-space: pre-line;
+    }
+
+    .comment-actions {
+      margin-top: 10px;
+      display: flex;
+      gap: 12px;
+    }
+
+    .reply-btn {
+      color: var(--honey);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* ریپلای‌ها */
+    .replies-container {
+      margin-top: 12px;
+      padding-right: 18px;
+      border-right: 2px solid var(--honey);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .reply-card {
+      background: var(--card-inner);
+      border-radius: 12px;
+      padding: 12px;
+    }
+
+    .admin-badge {
+      background: linear-gradient(135deg, var(--honey), var(--orange));
+      color: #1a0f00;
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 6px;
+    }
+
+    .reply-input-box {
+      margin-top: 10px;
+      display: none;
+      gap: 8px;
+    }
+
+    .reply-input-box.open {
+      display: flex;
+    }
+
+    /* پاپ‌آپ تشکر خرسولی */
+    .toast-bear {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: linear-gradient(135deg, #ffb703, #fb8500);
+      color: #120b02;
+      padding: 14px 24px;
+      border-radius: 50px;
+      box-shadow: 0 10px 25px rgba(251, 133, 0, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Lalezar', cursive;
+      font-size: 1.3rem;
+      z-index: 1000;
+      opacity: 0;
+      transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      pointer-events: none;
+    }
+
+    .toast-bear.active {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* فوتر اختصاصی */
+    footer {
+      margin-top: 35px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      font-family: 'Vazirmatn', sans-serif;
+    }
+
+    footer .brand {
+      color: #fff;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- هدر بازی -->
+    <div class="hero-box">
+      <h1 class="lalezar">بازی اسی خرسی (ESI KHERSI) 🐾</h1>
+      <p>هرگونه پیشنهاد، باگ یا انتقادی داری برای ما بنویس. نیاز به هیچ لاگینی نداری (حالت مهمان)، یا می‌تونی با یک کلیک با گوگل وارد بشی. سازنده بازی شخصاً به همه جواب می‌ده!</p>
+      
+      <div style="margin-top: 16px;">
+        <button class="btn-admin" onclick="toggleAdminMode()" id="adminToggleBtn">
+          🔑 ورود سازنده (ادمین)
+        </button>
+      </div>
+    </div>
+
+    <!-- فرم ارسال نظر -->
+    <div class="form-box">
+      <div class="form-title lalezar">
+        <span>ثبت نظر جدید</span>
+        <span class="user-profile-badge" id="currentUserBadge">حالت: مهمان 🐻</span>
+      </div>
+
+      <div class="input-group">
+        <input type="text" id="authorInput" placeholder="نام یا لقب شما (مثال: خرس قهرمان)">
+      </div>
+
+      <div class="input-group">
+        <textarea id="contentInput" placeholder="انتقاد یا پیشنهادت رو بنویس..."></textarea>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-submit" onclick="submitComment()">
+          <span>ارسال نظر خرسولی</span>
+          <span>🐾</span>
+        </button>
+        
+        <button class="btn btn-google" id="googleLoginBtn" onclick="loginWithGoogle()">
+          <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+          <span>ورود با گوگل</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- تالار نظرات -->
+    <h2 class="lalezar" style="color: var(--honey); font-size: 1.6rem; margin-top: 10px;">
+      نظرات خرسولیا (<span id="commentCount">0</span>)
+    </h2>
+
+    <div class="comments-area" id="commentsList">
+      <!-- نظرات کاربرها اینجا قرار می‌گیرد -->
+    </div>
+
+    <!-- فوتر اختصاصی درخواستی شما -->
+    <footer>
+      ساخته شده با عشق توسط <span class="brand">NightVex</span> 💜🤎
+    </footer>
+
+  </div>
+
+  <!-- توست پیام تشکر خرسولی -->
+  <div class="toast-bear" id="thanksToast">
+    <span>🐻</span>
+    <span>خیلی ممنون از نظرت خرسولی عزیز!</span>
+    <span>❤️</span>
+  </div>
+
+  <script>
+    // اطلاعات کاربر فعلی
+    let currentUser = {
+      name: '',
+      photo: '',
+      isGoogle: false,
+      isAdmin: false
+    };
+
+    // لیست کامنت‌ها بدون هیچ دیتای فیک یا دمو
+    let comments = JSON.parse(localStorage.getItem('esi_comments')) || [];
+
+    // نمایش پاپ‌آپ تشکر
+    function showToast() {
+      const toast = document.getElementById('thanksToast');
+      toast.classList.add('active');
+      setTimeout(() => {
+        toast.classList.remove('active');
+      }, 4200);
+    }
+
+    // رندر کامنت‌ها
+    function renderComments() {
+      const list = document.getElementById('commentsList');
+      const count = document.getElementById('commentCount');
+      list.innerHTML = '';
+      count.innerText = comments.length;
+
+      // اگر نظری ثبت نشده بود
+      if (comments.length === 0) {
+        list.innerHTML = `
+          <div class="empty-state">
+            <span>🐾</span>
+            <p class="lalezar" style="font-size: 1.3rem; color: var(--honey); margin-bottom: 6px;">هنوز هیچ نظری ثبت نشده است!</p>
+            <p>اولین خرسولی باش که نظر یا پیشنهادت رو برای بازی ثبت می‌کنی ✨</p>
+          </div>
+        `;
+        return;
+      }
+
+      // ساخت کارت‌های کامنت
+      comments.forEach((c) => {
+        const card = document.createElement('div');
+        card.className = 'comment-card';
+
+        let avatarHtml = c.avatar.startsWith('http') 
+          ? `<img src="${c.avatar}" alt="${c.author}">`
+          : `<span>${c.avatar}</span>`;
+
+        let repliesHtml = '';
+        if (c.replies && c.replies.length > 0) {
+          repliesHtml = '<div class="replies-container">';
+          c.replies.forEach(r => {
+            repliesHtml += `
+              <div class="reply-card">
+                <div class="comment-header">
+                  <div class="comment-user">
+                    <div class="user-avatar">${r.isAdmin ? '👑' : '🐾'}</div>
+                    <span class="user-name">
+                      ${r.author} 
+                      ${r.isAdmin ? '<span class="admin-badge">سازنده بازی</span>' : ''}
+                    </span>
+                  </div>
+                  <span class="comment-date">${r.date}</span>
+                </div>
+                <div class="comment-text">${r.text}</div>
+              </div>
+            `;
+          });
+          repliesHtml += '</div>';
+        }
+
+        card.innerHTML = `
+          <div class="comment-header">
+            <div class="comment-user">
+              <div class="user-avatar">${avatarHtml}</div>
+              <span class="user-name">${c.author}</span>
+            </div>
+            <span class="comment-date">${c.date}</span>
+          </div>
+          <div class="comment-text">${c.text}</div>
+          
+          <div class="comment-actions">
+            <button class="reply-btn" onclick="toggleReplyBox(${c.id})">
+              💬 پاسخ به این نظر
+            </button>
+          </div>
+
+          <div class="reply-input-box" id="reply-box-${c.id}">
+            <input type="text" id="reply-input-${c.id}" placeholder="پاسخ شما به این نظر...">
+            <button class="btn btn-submit" style="min-width: 90px; padding: 6px 14px;" onclick="submitReply(${c.id})">ارسال</button>
+          </div>
+
+          ${repliesHtml}
+        `;
+
+        list.appendChild(card);
+      });
+    }
+
+    // ثبت نظر اصلی
+    function submitComment() {
+      const authorInput = document.getElementById('authorInput');
+      const contentInput = document.getElementById('contentInput');
+
+      const name = authorInput.value.trim() || (currentUser.name || "خرسولی ناشناس");
+      const text = contentInput.value.trim();
+
+      if (!text) {
+        alert("لطفاً متن نظرت رو بنویس خرسولی عزیز!");
+        return;
+      }
+
+      const newComment = {
+        id: Date.now(),
+        author: currentUser.isAdmin ? "سازنده بازی ESI KHERSI" : name,
+        avatar: currentUser.photo || (currentUser.isAdmin ? "👑" : "🐻"),
+        text: text,
+        date: "لحظاتی پیش",
+        replies: []
+      };
+
+      comments.unshift(newComment);
+      localStorage.setItem('esi_comments', JSON.stringify(comments));
+
+      contentInput.value = '';
+      if (!currentUser.isGoogle) authorInput.value = '';
+
+      renderComments();
+      showToast(); // فعال شدن پیام: خیلی ممنون از نظرت خرسولی عزیز!
+    }
+
+    // باز و بسته کردن باکس ریپلای
+    function toggleReplyBox(id) {
+      const box = document.getElementById(`reply-box-${id}`);
+      box.classList.toggle('open');
+    }
+
+    // ارسال پاسخ (ریپلای)
+    function submitReply(commentId) {
+      const input = document.getElementById(`reply-input-${commentId}`);
+      const text = input.value.trim();
+
+      if (!text) return;
+
+      const comment = comments.find(c => c.id === commentId);
+      if (comment) {
+        if (!comment.replies) comment.replies = [];
+
+        comment.replies.push({
+          author: currentUser.isAdmin ? "سازنده بازی ESI KHERSI" : (currentUser.name || "یک خرسولی"),
+          isAdmin: currentUser.isAdmin,
+          avatar: currentUser.isAdmin ? "👑" : "🐾",
+          text: text,
+          date: "لحظاتی پیش"
+        });
+
+        localStorage.setItem('esi_comments', JSON.stringify(comments));
+        renderComments();
+        showToast();
+      }
+    }
+
+    // ورود سریع با گوگل
+    function loginWithGoogle() {
+      const userName = prompt("نام یا جیمیل خود را وارد کنید:");
+      if (userName) {
+        currentUser = {
+          name: userName,
+          photo: "https://api.dicebear.com/7.x/bottts/svg?seed=" + encodeURIComponent(userName),
+          isGoogle: true,
+          isAdmin: false
+        };
+
+        document.getElementById('authorInput').value = currentUser.name;
+        document.getElementById('authorInput').disabled = true;
+        document.getElementById('currentUserBadge').innerHTML = `وارد شده: ${currentUser.name} ✅`;
+        document.getElementById('googleLoginBtn').style.display = 'none';
+      }
+    }
+
+    // ورود ادمین (سازنده بازی)
+    function toggleAdminMode() {
+      if (currentUser.isAdmin) {
+        currentUser.isAdmin = false;
+        document.getElementById('adminToggleBtn').innerText = "🔑 ورود سازنده (ادمین)";
+        alert("از حالت ادمین خارج شدید.");
+      } else {
+        const pass = prompt("رمز ورود سازنده بازی را وارد کنید (پیش‌فرض: esi):");
+        if (pass === "esi") {
+          currentUser.isAdmin = true;
+          document.getElementById('adminToggleBtn').innerText = "👑 ادمین فعال است (خروج)";
+          document.getElementById('currentUserBadge').innerHTML = "حالت: سازنده بازی ESI KHERSI 👑";
+          alert("خوش آمدید NightVex عزیز! اکنون پاسخ‌های شما با تگ طلایی سازنده ارسال می‌شوند.");
+        } else if (pass !== null) {
+          alert("رمز اشتباه بود!");
+        }
+      }
+    }
+
+    // لود اولیه
+    renderComments();
+  </script>
+</body>
+</html>
