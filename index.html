@@ -10,6 +10,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@300;400;600;800&display=swap" rel="stylesheet">
 
+  <!-- کتابخانه Supabase برای اتصال به دیتابیس بدون تحریم -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <style>
     :root {
       --bg-color: #0e0c13;
@@ -18,8 +21,6 @@
       --border-color: #312842;
       --honey: #ffb703;
       --orange: #fb8500;
-      --purple: #9d4edd;
-      --brown: #7f4f24;
       --text: #ffffff;
       --text-muted: #a39eb2;
       --radius: 18px;
@@ -57,14 +58,13 @@
       gap: 20px;
     }
 
-    /* بنر بالای صفحه */
+    /* هدر */
     .hero-box {
       background: linear-gradient(145deg, #221a30, #14101c);
       border: 2px solid var(--border-color);
       border-radius: var(--radius);
       padding: 30px 20px;
       text-align: center;
-      position: relative;
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
     }
 
@@ -83,7 +83,6 @@
       line-height: 1.7;
     }
 
-    
     /* فرم ارسال نظر */
     .form-box {
       background: var(--card-bg);
@@ -139,7 +138,6 @@
       min-height: 95px;
     }
 
-    /* دکمه‌ها */
     .btn-row {
       display: flex;
       gap: 10px;
@@ -174,17 +172,6 @@
       box-shadow: 0 8px 20px rgba(251, 133, 0, 0.45);
     }
 
-    .btn-google {
-      background: #ffffff;
-      color: #222;
-      box-shadow: 0 5px 15px rgba(255, 255, 255, 0.15);
-    }
-
-    .btn-google:hover {
-      background: #f1f1f1;
-      transform: translateY(-2px);
-    }
-
     .btn-admin {
       background: transparent;
       border: 1px dashed var(--border-color);
@@ -201,7 +188,7 @@
       color: var(--honey);
     }
 
-    /* لیست کامنت‌ها */
+    /* کامنت‌ها */
     .comments-area {
       display: flex;
       flex-direction: column;
@@ -253,13 +240,6 @@
       justify-content: center;
       font-size: 1.2rem;
       border: 1px solid var(--border-color);
-      overflow: hidden;
-    }
-
-    .user-avatar img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
     }
 
     .user-name {
@@ -301,7 +281,6 @@
       gap: 4px;
     }
 
-    /* ریپلای‌ها */
     .replies-container {
       margin-top: 12px;
       padding-right: 18px;
@@ -336,7 +315,7 @@
       display: flex;
     }
 
-    /* پاپ‌آپ تشکر خرسولی */
+    /* پیام تشکر خرسولی */
     .toast-bear {
       position: fixed;
       bottom: 24px;
@@ -363,13 +342,11 @@
       opacity: 1;
     }
 
-    /* فوتر اختصاصی */
     footer {
       margin-top: 35px;
       text-align: center;
       color: var(--text-muted);
       font-size: 0.95rem;
-      font-family: 'Vazirmatn', sans-serif;
     }
 
     footer .brand {
@@ -382,10 +359,9 @@
 
   <div class="container">
     
-    <!-- هدر بازی -->
     <div class="hero-box">
       <h1 class="lalezar">بازی اسی خرسی (ESI KHERSI) 🐾</h1>
-      <p>هرگونه پیشنهاد، باگ یا انتقادی داری برای ما بنویس. نیاز به هیچ لاگینی نداری (حالت مهمان)، یا می‌تونی با یک کلیک با گوگل وارد بشی. سازنده بازی شخصاً به همه جواب می‌ده!</p>
+      <p>هرگونه پیشنهاد، باگ یا انتقادی داری بنویس. همه نظرات به دست سازنده بازی می‌رسه و همین‌جا پاسخ داده می‌شه!</p>
       
       <div style="margin-top: 16px;">
         <button class="btn-admin" onclick="toggleAdminMode()" id="adminToggleBtn">
@@ -402,7 +378,7 @@
       </div>
 
       <div class="input-group">
-        <input type="text" id="authorInput" placeholder="نام یا لقب شما (مثال: خرس قهرمان)">
+        <input type="text" id="authorInput" placeholder="نام یا لقب شما (مثال: خرس تک‌تیرانداز)">
       </div>
 
       <div class="input-group">
@@ -410,35 +386,33 @@
       </div>
 
       <div class="btn-row">
-        <button class="btn btn-submit" onclick="submitComment()">
+        <button class="btn btn-submit" id="submitBtn" onclick="submitComment()">
           <span>ارسال نظر خرسولی</span>
           <span>🐾</span>
-        </button>
-        
-        <button class="btn btn-google" id="googleLoginBtn" onclick="loginWithGoogle()">
-          <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
-          <span>ورود با گوگل</span>
         </button>
       </div>
     </div>
 
-    <!-- تالار نظرات -->
+    <!-- لیست نظرات آنلاین -->
     <h2 class="lalezar" style="color: var(--honey); font-size: 1.6rem; margin-top: 10px;">
       نظرات خرسولیا (<span id="commentCount">0</span>)
     </h2>
 
     <div class="comments-area" id="commentsList">
-      <!-- نظرات کاربرها اینجا قرار می‌گیرد -->
+      <div class="empty-state">
+        <span>⏳</span>
+        <p>در حال دریافت جدیدترین نظرات از سرور...</p>
+      </div>
     </div>
 
-    <!-- فوتر اختصاصی درخواستی شما -->
+    <!-- فوتر اختصاصی شما -->
     <footer>
       ساخته شده با عشق توسط <span class="brand">NightVex</span> 💜🤎
     </footer>
 
   </div>
 
-  <!-- توست پیام تشکر خرسولی -->
+  <!-- توست پیام تشکر -->
   <div class="toast-bear" id="thanksToast">
     <span>🐻</span>
     <span>خیلی ممنون از نظرت خرسولی عزیز!</span>
@@ -446,18 +420,21 @@
   </div>
 
   <script>
-    // اطلاعات کاربر فعلی
-    let currentUser = {
-      name: '',
-      photo: '',
-      isGoogle: false,
-      isAdmin: false
-    };
+    /* -------------------------------------------------------------
+       تنظیمات دیتابیس Supabase (بدون تحریم برای ایران)
+       کافیست دو مقدار زیر را از پنل Supabase خود در اینجا قرار دهید:
+    ------------------------------------------------------------- */
+    const SUPABASE_URL = "https://YOUR_PROJECT_ID.supabase.co"; 
+    const SUPABASE_ANON_KEY = "YOUR_ANON_PUBLIC_KEY";
 
-    // لیست کامنت‌ها بدون هیچ دیتای فیک یا دمو
-    let comments = JSON.parse(localStorage.getItem('esi_comments')) || [];
+    // ساخت اتصال به دیتابیس
+    const client = (SUPABASE_URL.includes("YOUR_PROJECT_ID")) 
+      ? null 
+      : supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    // نمایش پاپ‌آپ تشکر
+    let isAdmin = false;
+
+    // توست تشکر
     function showToast() {
       const toast = document.getElementById('thanksToast');
       toast.classList.add('active');
@@ -466,15 +443,39 @@
       }, 4200);
     }
 
-    // رندر کامنت‌ها
-    function renderComments() {
+    // دریافت نظرات به صورت آنلاین
+    async function loadComments() {
       const list = document.getElementById('commentsList');
       const count = document.getElementById('commentCount');
-      list.innerHTML = '';
-      count.innerText = comments.length;
 
-      // اگر نظری ثبت نشده بود
-      if (comments.length === 0) {
+      if (!client) {
+        list.innerHTML = `
+          <div class="empty-state" style="border-color: #ff0054;">
+            <span>⚠️</span>
+            <p class="lalezar" style="color: #ff0054; font-size: 1.3rem;">دیتابیس هنوز متصل نشده است!</p>
+            <p>لطفاً طبق ۳ مرحله‌ی راهنما، کلیدهای رایگان Supabase را داخل کد قرار دهید تا پیام‌ها به دست شما برسند.</p>
+          </div>
+        `;
+        return;
+      }
+
+      // دریافت از دیتابیس آنلاین
+      const { data, error } = await client
+        .from('comments')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        list.innerHTML = `<div class="empty-state"><p>خطا در برقراری ارتباط با سرور: ${error.message}</p></div>`;
+        return;
+      }
+
+      // دسته‌بندی نظرات اصلی و ریپلای‌ها
+      const mainComments = data.filter(c => !c.parent_id);
+      const replies = data.filter(c => c.parent_id);
+      count.innerText = mainComments.length;
+
+      if (mainComments.length === 0) {
         list.innerHTML = `
           <div class="empty-state">
             <span>🐾</span>
@@ -485,30 +486,30 @@
         return;
       }
 
-      // ساخت کارت‌های کامنت
-      comments.forEach((c) => {
+      list.innerHTML = '';
+
+      mainComments.forEach((c) => {
         const card = document.createElement('div');
         card.className = 'comment-card';
 
-        let avatarHtml = c.avatar.startsWith('http') 
-          ? `<img src="${c.avatar}" alt="${c.author}">`
-          : `<span>${c.avatar}</span>`;
-
+        // ریپلای‌های مربوط به این نظر
+        const commentReplies = replies.filter(r => r.parent_id === c.id);
         let repliesHtml = '';
-        if (c.replies && c.replies.length > 0) {
+        
+        if (commentReplies.length > 0) {
           repliesHtml = '<div class="replies-container">';
-          c.replies.forEach(r => {
+          commentReplies.forEach(r => {
             repliesHtml += `
               <div class="reply-card">
                 <div class="comment-header">
                   <div class="comment-user">
-                    <div class="user-avatar">${r.isAdmin ? '👑' : '🐾'}</div>
+                    <div class="user-avatar">${r.is_admin ? '👑' : '🐾'}</div>
                     <span class="user-name">
                       ${r.author} 
-                      ${r.isAdmin ? '<span class="admin-badge">سازنده بازی</span>' : ''}
+                      ${r.is_admin ? '<span class="admin-badge">سازنده بازی</span>' : ''}
                     </span>
                   </div>
-                  <span class="comment-date">${r.date}</span>
+                  <span class="comment-date">${new Date(r.created_at).toLocaleDateString('fa-IR')}</span>
                 </div>
                 <div class="comment-text">${r.text}</div>
               </div>
@@ -520,10 +521,13 @@
         card.innerHTML = `
           <div class="comment-header">
             <div class="comment-user">
-              <div class="user-avatar">${avatarHtml}</div>
-              <span class="user-name">${c.author}</span>
+              <div class="user-avatar">${c.is_admin ? '👑' : '🐻'}</div>
+              <span class="user-name">
+                ${c.author}
+                ${c.is_admin ? '<span class="admin-badge">سازنده بازی</span>' : ''}
+              </span>
             </div>
-            <span class="comment-date">${c.date}</span>
+            <span class="comment-date">${new Date(c.created_at).toLocaleDateString('fa-IR')}</span>
           </div>
           <div class="comment-text">${c.text}</div>
           
@@ -545,12 +549,13 @@
       });
     }
 
-    // ثبت نظر اصلی
-    function submitComment() {
+    // ارسال نظر جدید به سرور
+    async function submitComment() {
       const authorInput = document.getElementById('authorInput');
       const contentInput = document.getElementById('contentInput');
+      const submitBtn = document.getElementById('submitBtn');
 
-      const name = authorInput.value.trim() || (currentUser.name || "خرسولی ناشناس");
+      const name = authorInput.value.trim() || "خرسولی ناشناس";
       const text = contentInput.value.trim();
 
       if (!text) {
@@ -558,95 +563,100 @@
         return;
       }
 
-      const newComment = {
-        id: Date.now(),
-        author: currentUser.isAdmin ? "سازنده بازی ESI KHERSI" : name,
-        avatar: currentUser.photo || (currentUser.isAdmin ? "👑" : "🐻"),
-        text: text,
-        date: "لحظاتی پیش",
-        replies: []
-      };
+      if (!client) {
+        alert("ابتدا کلیدهای Supabase را قرار دهید.");
+        return;
+      }
 
-      comments.unshift(newComment);
-      localStorage.setItem('esi_comments', JSON.stringify(comments));
+      submitBtn.disabled = true;
+      submitBtn.innerText = "در حال ارسال...";
 
-      contentInput.value = '';
-      if (!currentUser.isGoogle) authorInput.value = '';
+      const { error } = await client.from('comments').insert([
+        {
+          author: isAdmin ? "سازنده بازی ESI KHERSI" : name,
+          text: text,
+          is_admin: isAdmin,
+          parent_id: null
+        }
+      ]);
 
-      renderComments();
-      showToast(); // فعال شدن پیام: خیلی ممنون از نظرت خرسولی عزیز!
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = `<span>ارسال نظر خرسولی</span><span>🐾</span>`;
+
+      if (error) {
+        alert("خطا در ارسال نظر: " + error.message);
+      } else {
+        contentInput.value = '';
+        authorInput.value = '';
+        showToast();
+        loadComments();
+      }
     }
 
-    // باز و بسته کردن باکس ریپلای
+    // باز کردن کادر ریپلای
     function toggleReplyBox(id) {
       const box = document.getElementById(`reply-box-${id}`);
       box.classList.toggle('open');
     }
 
-    // ارسال پاسخ (ریپلای)
-    function submitReply(commentId) {
-      const input = document.getElementById(`reply-input-${commentId}`);
+    // ارسال ریپلای به سرور
+    async function submitReply(parentId) {
+      const input = document.getElementById(`reply-input-${parentId}`);
       const text = input.value.trim();
 
       if (!text) return;
+      if (!client) return;
 
-      const comment = comments.find(c => c.id === commentId);
-      if (comment) {
-        if (!comment.replies) comment.replies = [];
-
-        comment.replies.push({
-          author: currentUser.isAdmin ? "سازنده بازی ESI KHERSI" : (currentUser.name || "یک خرسولی"),
-          isAdmin: currentUser.isAdmin,
-          avatar: currentUser.isAdmin ? "👑" : "🐾",
+      const { error } = await client.from('comments').insert([
+        {
+          author: isAdmin ? "سازنده بازی ESI KHERSI" : "یک خرسولی",
           text: text,
-          date: "لحظاتی پیش"
-        });
+          is_admin: isAdmin,
+          parent_id: parentId
+        }
+      ]);
 
-        localStorage.setItem('esi_comments', JSON.stringify(comments));
-        renderComments();
+      if (error) {
+        alert("خطا در ارسال پاسخ: " + error.message);
+      } else {
+        input.value = '';
+        toggleReplyBox(parentId);
         showToast();
+        loadComments();
       }
     }
 
-    // ورود سریع با گوگل
-    function loginWithGoogle() {
-      const userName = prompt("نام یا جیمیل خود را وارد کنید:");
-      if (userName) {
-        currentUser = {
-          name: userName,
-          photo: "https://api.dicebear.com/7.x/bottts/svg?seed=" + encodeURIComponent(userName),
-          isGoogle: true,
-          isAdmin: false
-        };
-
-        document.getElementById('authorInput').value = currentUser.name;
-        document.getElementById('authorInput').disabled = true;
-        document.getElementById('currentUserBadge').innerHTML = `وارد شده: ${currentUser.name} ✅`;
-        document.getElementById('googleLoginBtn').style.display = 'none';
-      }
-    }
-
-    // ورود ادمین (سازنده بازی)
+    // ورود سازنده بازی
     function toggleAdminMode() {
-      if (currentUser.isAdmin) {
-        currentUser.isAdmin = false;
+      if (isAdmin) {
+        isAdmin = false;
         document.getElementById('adminToggleBtn').innerText = "🔑 ورود سازنده (ادمین)";
+        document.getElementById('currentUserBadge').innerText = "حالت: مهمان 🐻";
         alert("از حالت ادمین خارج شدید.");
       } else {
-        const pass = prompt("رمز ورود سازنده بازی را وارد کنید:");
+        const pass = prompt("رمز ورود سازنده بازی را وارد کنید (پیش‌فرض: esi):");
         if (pass === "esi") {
-          currentUser.isAdmin = true;
+          isAdmin = true;
           document.getElementById('adminToggleBtn').innerText = "👑 ادمین فعال است (خروج)";
-          document.getElementById('currentUserBadge').innerHTML = "حالت: سازنده بازی ESI KHERSI 👑";
-          alert("خوش آمدید NightVex عزیز! اکنون پاسخ‌های شما با تگ طلایی سازنده ارسال می‌شوند.");
+          document.getElementById('currentUserBadge').innerText = "حالت: سازنده بازی ESI KHERSI 👑";
+          alert("خوش آمدید NightVex عزیز! تمام پاسخ‌های شما با تگ طلایی سازنده بازی ثبت خواهد شد.");
         } else if (pass !== null) {
           alert("رمز اشتباه بود!");
         }
       }
     }
 
-    // لود اولیه
-    renderComments();
+    // لود کامنت‌ها در ابتدا
+    loadComments();
+
+    // گوش دادن زنده (Realtime) به نظرات جدید
+    if (client) {
+      client.channel('public:comments')
+        .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'comments' }, () => {
+          loadComments();
+        })
+        .subscribe();
+    }
   </script>
 </body>
 </html>
